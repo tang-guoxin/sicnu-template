@@ -1,0 +1,28 @@
+\begin{Appendix}
+\centering
+\begin{tcolorbox}[colback=gray!10,
+    colframe=black,
+    width=12cm,
+    arc=1mm, auto outer arc,
+    boxrule=0.5pt,]
+\begin{verbatim}
+// 整数快速幂
+    typedef long long int LI;
+    LI quick_pow_mod(LI y, LI x, LI c)  
+    {
+        LI z = 1;
+        LI m = y;
+        m = m % c;
+        if(x == 0) return 1;
+        while(x)
+        {   
+            if(x & 1) z = (z * m) % c; 
+            x >>= 1;
+            m = (m * m) % c; 
+        } 
+        return z;
+    } 
+
+\end{verbatim}
+\end{tcolorbox}
+\end{Appendix}

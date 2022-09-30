@@ -1,0 +1,201 @@
+\section{简单的案例}
+
+\subsection{数学环境测试}
+
+\begin{definition}[菲波那切数列]
+    令$F_0=0,F_1=1$，称由如下递推定义的数列
+    \begin{equation}
+        F_k = F_{k-1} + F_{k-2}.
+    \end{equation}
+    为斐波那契数列。
+\end{definition}
+
+\begin{theorem}[斐波那契的通项公式]
+    斐波那契数列通项公式是一个典型的由无理数表示有理数的公式：
+    \begin{equation}
+        F_k=\frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right) ^k-\left( \frac{1-\sqrt{5}}{2} \right) ^k \right) 
+    \end{equation}
+    \begin{proof}
+        \begin{equation}
+            \begin{aligned}
+                F_k&=\frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right) ^k-\left( \frac{1-\sqrt{5}}{2} \right) ^k \right)\\
+                &=\frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right) ^{k-2}\left( \frac{1+\sqrt{5}}{2} \right) ^2-\left( \frac{1-\sqrt{5}}{2} \right) ^{k-2}\left( \frac{1-\sqrt{5}}{2} \right) ^2 \right)\\
+                &=\frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right) ^{k-2}\left( \frac{3+\sqrt{5}}{2} \right) -\left( \frac{1-\sqrt{5}}{2} \right) ^{k-2}\left( \frac{3-\sqrt{5}}{2} \right) \right)\\
+                &=\frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right) ^{k-2}\left( \frac{1+\sqrt{5}}{2}+1 \right) -\left( \frac{1-\sqrt{5}}{2} \right) ^{k-2}\left( \frac{1-\sqrt{5}}{2}+1 \right) \right)\\
+                &=\frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right) ^{k-1}+\left( \frac{1+\sqrt{5}}{2} \right) ^{k-2}-\left( \frac{1-\sqrt{5}}{2} \right) ^{k-1}-\left( \frac{1-\sqrt{5}}{2} \right) ^{k-2} \right)\\
+                &=\frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right) ^{k-1}-\left( \frac{1-\sqrt{5}}{2} \right) ^{k-1}+\left( \frac{1+\sqrt{5}}{2} \right) ^{k-2}-\left( \frac{1-\sqrt{5}}{2} \right) ^{k-2} \right)\\
+                &=\frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right) ^{k-1}-\left( \frac{1-\sqrt{5}}{2} \right) ^{k-1} \right) +\frac{1}{\sqrt{5}}\left( \left( \frac{1+\sqrt{5}}{2} \right) ^{k-2}-\left( \frac{1-\sqrt{5}}{2} \right) ^{k-2} \right)\\
+                &=F_{k-1}+F_{k-2}\\
+            \end{aligned}
+        \end{equation}
+    \end{proof}
+\end{theorem}
+
+\begin{corollary}[关于斐波那契数列的一些等式]
+    \begin{equation}
+        F_{k+1}F_{k-1}-F_{k}^{2}=(-1)^k
+    \end{equation}
+    \begin{equation}
+        F_{n+m}=F_mF_{n+1}+F_{m-1}F_n
+    \end{equation}
+    \begin{equation}
+        \lim_{k\rightarrow \infty} \frac{F_k}{F_{k+1}}=\lim_{k\rightarrow \infty} \frac{F_{k+1}}{F_{k+2}}=\frac{\sqrt{5}-1}{2}
+    \end{equation}
+    \begin{equation}
+        \sum_{i=1}^n{F_i}=F_{n+2}-1
+    \end{equation}
+    \begin{equation}
+        \sum_{i=1}^n{F_{2n-1}}=F_{2n}
+    \end{equation}
+    \begin{equation}
+        \sum_{i=1}^n{F_{2n}}=F_{2n+1}-1
+    \end{equation}
+    
+\end{corollary}
+
+\begin{lemma}[整数快速幂]\label{lem:lem1}
+    设一个正整数$x$的二进制表示为$x=\sum_{i=0}^{n-1}{b_i\times 2^i}$。其中$b_i\in\{0, 1\}$是$x$的第$i$位的二进制值。设另有一正整数$y$，那么$y$的$x$次幂可以表示为：
+    \begin{equation}
+        y^x=\prod_{i=0}^{n-1}{y^{b_i\times 2^i}}
+    \end{equation}
+    通过这种计算方式将时间复杂度从$O(n)$降低到$O(\log(n))$。代码实现见附录。
+\end{lemma}
+
+\begin{proposition}[矩阵快速幂]
+    设$F_n$为斐波那契数列的第$n$项，则有：
+    \begin{equation}
+        \left[ \begin{array}{c}
+            F_n\\
+            F_{n-1}\\
+        \end{array} \right] =\left[ \begin{matrix}
+            1&		1\\
+            1&		0\\
+        \end{matrix} \right] \times \left[ \begin{array}{c}
+            F_{n-1}\\
+            F_{n-2}\\
+        \end{array} \right] 
+    \end{equation}
+    更进一步有：
+    \begin{equation}
+        \left[ \begin{array}{c}
+            F_n\\
+            F_{n-1}\\
+        \end{array} \right] =\left[ \begin{matrix}
+            1&		1\\
+            1&		0\\
+        \end{matrix} \right] ^{n-1}\times \left[ \begin{array}{c}
+            F_2\\
+            F_1\\
+        \end{array} \right] 
+    \end{equation}
+    令矩阵$\varLambda =\left[ \begin{matrix}
+        1&		1\\
+        1&		0\\
+    \end{matrix} \right] $，则$\varLambda ^n$可以通过与引理\ref{lem:lem1}类似的方法快速计算出。矩阵快速幂求斐波那契数列的第$n$项是目前最快的方法。
+\end{proposition}
+
+
+
+\begin{example}[P1962~斐波那契数列(洛谷)]
+    大家都知道，斐波那契数列是满足如下性质的一个数列：
+    \begin{equation}
+        F_n=\left\{\begin{array}{r}
+            1(n \leq 2) \\
+            F_{n-1}+F_{n-2}(n \geq 3)
+            \end{array}\right.
+    \end{equation}
+    请你求出$F_n~\mathrm{mode}~10^9 + 7$的值。时间限制$\mathrm{1.00s}$，内存限制$\mathrm{125.00MB}$。
+    \par 对于 $60\%$ 的数据，$1\le n \le 92$；对于 $100\%$ 的数据，$1\le n < 2^{63}$。
+    \par \textbf{解：}略......
+\end{example}
+
+% \lstinputlisting[breaklines]{source.c}
+
+\subsection{总结与展望}
+最后附上常用常用的其它命令，它们都不是这个模板定义的指令或环境。但是lshort-zh-cn文档值的所有人去阅读它，这是一个 \LaTeX 中文教程，内容在100页左右，只需要几个小时你就能理解大部分内容。看懂了之后一般的 \LaTeX 排版不在话下。
+
+\subsubsection{TeXLive包管理器与帮助文档}
+\begin{tcolorbox}[colback=gray!10,
+    colframe=black,
+    width=16cm,
+    arc=1mm, auto outer arc,
+    boxrule=0.5pt,]
+\begin{verbatim}
+    tlmgr --version             % 查看TeXLive包管理器的版本
+    tlmgr option repository ctan% 更新包
+    tlmgr update --self --all   % 更新tmlgr
+    texdoc ctex                 % 查看 ctex 宏集帮助文档, 
+                                % 这个模板也参考了这个文档
+    texdoc xecjk                % 里面有许多中文的额外支持, 如下划线自动换行
+    texdoc lshort-zh-cn         % 查看一份不太简短的LaTex2e教程, 100页左右
+                                % 看懂这个文档你就可以理解sicnu.cls的80%的内容
+                                % 非常适合新手的入门教程
+    texdoc [texdoc]             % 随机打开文档或查看所有可选文档
+    texdoc package-name         % 查看任一宏包的帮助文档
+    xelatex -v                  % 查看xelatex的版本
+    latexmk -xelatex main.tex   % 自动编译main.tex文档
+\end{verbatim}
+
+\end{tcolorbox}
+
+\subsubsection{已导入的宏包}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage{graphicx}
+\begin{table}[H]
+    \centering
+    \caption{已导入的宏包}
+    \label{tab:pkgs}
+    % \resizebox{\columnwidth}{!}{% 这一行代码用于缩放表格
+    \begin{tabular}{llllll}
+    \hline
+    宏包名称       & 功能                    & 宏包名称      & 功能                  & 宏包名称      & 功能      \\ \hline
+    tikz       & 绘图                    & titletoc  & 目录相关                & graphicx  & 处理图形    \\
+    ctex       & \multirow{3}{*}{中文设置} & titlesec  & 标题相关                & float     & 浮动体设置   \\
+    xeCJK      &                       & fancyhdr  & 页眉页脚                & tabularx  & 可伸缩表格   \\
+    xeCJKfntef &                       & color     & \multirow{2}{*}{颜色} & multirow  & 合并多列    \\
+    gbt7714    & 参考文献规范                & xcolor    &                     & booktabs  & 表格粗横线   \\
+    enumitem   & 枚举环境                  & amsmath   & 数学公式                & bm        & 公式加粗    \\
+    subfigure  & 子图选项                  & amssymb   & 数学符号                & lmodern   & 公式字体    \\
+    ccaption   & 图形双标语                 & amsthm    & 定理证明                & fontspec  & 字体设置    \\
+    setspace   & 全局行距                  & ulem      & 下换线                 & geometry  & 页边距     \\
+    multicol   & 页面分栏                  & ragged2e  & 对齐方式                & epstopdf  & eps转pdf \\
+    fontenc    & 英文字体加粗                & afterpage & 空白页                 & hyperref  & 超链接     \\
+    bibentry   & 插入完整参考文献              & listings  & 插入代码                & tcolorbox & 颜色盒子    \\
+    ifthen & \textbackslash{}ifthenelse & xifthen & {}\textbackslash{}ifnum & algorithm2e & 算法 \\ 
+    tocbibind & 增加目录 &  & &  &  \\ \hline
+    \end{tabular}%
+    % }
+\end{table}
+
+需要注意的是，关于算法包有很多，这里选择的是下面的第三个(源代码第65-67行)，这三个不能同时导入。更多信息点击\href{https://www.overleaf.com/learn/latex/Algorithms}{传送门}或者输入下面的第四行命令查看。
+\begin{tcolorbox}[colback=gray!10,
+    colframe=black,
+    width=16cm,
+    arc=1mm, auto outer arc,
+    boxrule=0.5pt,]
+\begin{verbatim}
+    \RequirePackage{algorithm}
+    \RequirePackage{algorithmic}
+    \RequirePackage{algorithm2e} 
+    texdoc algorithm2e 
+\end{verbatim}
+\end{tcolorbox}
+
+\begin{algorithm}[H]
+    \SetAlgoLined
+    \caption{整数快速幂}
+    \KwIn{$x$和$y$}
+    \KwOut{$z=y^x$}
+    $z \gets 1$ \;
+    $c \gets 1e9+7$\;
+    $m \gets y | c$\;
+    \While{$x$}{
+      \If{$y\&1$}{
+        $z \gets (z \times m)|c$\;
+      }
+      $m \gets (m \times m)|c$\;
+      $x \gets x>>1$\;
+    }
+\end{algorithm}

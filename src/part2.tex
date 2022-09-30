@@ -1,0 +1,152 @@
+\section{sicnu.cls的指令和环境}\label{sec:cml}
+\subsection{基本指令}
+\begin{tcolorbox}[colback=gray!10,
+    colframe=black,
+    width=16cm,
+    arc=1mm, auto outer arc,
+    boxrule=0.5pt,]
+    
+    \begin{enumerate}
+        \item \verb|\ChineseTitle{key}| 设置中文论文名称。
+        \item \verb|\EnglishTitle{key}| 设置英文论文名称。
+        \item \verb|\ChineseAuthorName{key}| 设置中文作者姓名。
+        \item \verb|\EnglishAuthorName{key}| 设置英文作者姓名。
+        \item \verb|\Classification{key}| 设置分类号，默认为O21。
+        \item \verb|\SecretLevel{key}| 设置密级，默认为公开。
+        \item \verb|\UnitCode{key}| 设置单位代码，默认为10636。
+        \item \verb|\StudentNumber{key}| 设置单位代码，默认为学号。
+        \item \verb|\ChineseSupervisor{key}| 设置中文导师姓名。
+        \item \verb|\ChineseSupervisor{key}| 设置英文导师姓名。
+        \item \verb|\ChineseMajorName{key}| 设置中文专业名。
+        \item \verb|\EnglishMajorName{key}| 设置英文专业名。
+        \item \verb|\ResearchDirection{key}| 设置研究方向。
+        \item \verb|\CollegeName{key}| 设置所在学院。
+        \item \verb|\ThesisSubmissionDate{key}| 设置论文提交日期。
+        \item \verb|\ThesisDefenseDate{key}| 设置论文答辩日期。
+        \item \verb|\GenerateContents| 在指定位置生成目录。
+        \item \verb|\EnglishKeyword{key}| 设置英文关键词，不同关键词用逗号分开。
+        \item \verb|\ChineseKeyword{key}| 设置中文关键词，不同关键词用逗号分开。
+        \item \verb|\SetReference| 在指定位置生成参考文献。
+        \item \verb|\MakeTitlePage[#1]| 在指定位置生成生成封面, 独创性声明和授权书。带有一个可选参数，设置为$1$改为博士学位论文，默认为$0$。
+        \item \verb|\GenerateFTAList| 生成图表和算法清单
+    \end{enumerate}
+
+\end{tcolorbox}
+
+\subsection{扩展指令}
+\begin{tcolorbox}[colback=gray!10,
+    colframe=black,
+    width=16cm,
+    arc=1mm, auto outer arc,
+    boxrule=0.5pt,]
+    
+    \begin{enumerate}
+        \item \verb|\NewEmptypPge| 增加一页空白页，并且不带页眉和页脚。\verb|\cleardoublepage|将清除偶数页，使得每一章都从奇数页开始。但是会受到pagecounter的影响。而此命令是强制性命令，不区分奇偶。
+        \item \verb|\EqualityNum{#1}{#2}| 比较两个数的大小，需要配合定义的宏\verb|\if@twonumcmp|一起使用。(这个函数最开始是实现标题自动换行的部分逻辑，后面已经使用更加有效的方式处理。)
+        \item \verb|\DegreeLevel{#1}| 设置偶数页页眉，博士论文需要使用这个指令，默认为硕士学位论文。
+        \item \verb|\SetLinkColor[#1]| 超链接开关，默认打开，设置为$0$关闭。
+        \item \verb|\Length{text}| 获取文本长度。(这个函数最开始是实现标题自动换行的部分逻辑，后面已经使用更加有效的方式处理。)
+        \item \verb|\newyouyuan{text}| 设置文本为幼圆。
+        \item \verb|\newfangsong{text}| 设置文本为仿宋。
+        
+    \end{enumerate}
+
+
+\end{tcolorbox}
+
+
+\subsection{新定义的环境}
+\begin{tcolorbox}[colback=gray!10,
+    colframe=black,
+    width=16cm,
+    arc=1mm, auto outer arc,
+    boxrule=0.5pt,]
+
+    \begin{enumerate}
+        \item 中文摘要环境
+\begin{verbatim}
+    \begin{ChineseAbstract}
+        text......
+        \ChineseKeyword{Keyword1;Keyword2;Keyword3;Keyword4;Keyword5}
+    \end{ChineseAbstract}
+\end{verbatim}
+        \item 英文摘要环境
+\begin{verbatim}
+    \begin{EnglishAbstract}
+        text......
+        \EnglishKeyword{Keyword1;Keyword2;Keyword3;Keyword4;Keyword5}
+    \end{EnglishAbstract}
+\end{verbatim}
+        \item 致谢环境
+\begin{verbatim}
+    \begin{MyHeart}
+        text......
+    \end{MyHeart}
+\end{verbatim}
+        \item 在校期间研究成果环境，需要配合\verb|\bibentry{key}|一起使用，就和引用参考文献的使用方法一致：\verb|\cite{key}|。
+\begin{verbatim}
+    \begin{Achievement}
+        \item \bibentry{tpe}
+        \item \bibentry{lecun}
+    \end{Achievement}
+\end{verbatim}
+        \item 附录环境
+\begin{verbatim}
+    \begin{Appendix}
+        text......
+    \end{Appendix}
+\end{verbatim}
+    \end{enumerate}
+\end{tcolorbox}
+
+\subsection{重定义的环境}
+
+\begin{tcolorbox}[colback=gray!10,
+    colframe=black,
+    width=16cm,
+    arc=1mm, auto outer arc,
+    boxrule=0.5pt,]
+
+    \begin{enumerate}[itemsep= 10pt, partopsep=10pt]
+        \item 定理环境
+\begin{verbatim}
+    \begin{theorem}[theorem name]
+        定理内容, 可以嵌套公式和证明环境.
+    \end{theorem}
+\end{verbatim}
+        \item 推论环境
+\begin{verbatim}
+    \begin{corollary}[corollary name]
+        推论内容, 可以嵌套公式和证明环境.
+    \end{corollary}
+\end{verbatim}
+        \item 例子环境
+\begin{verbatim}
+    \begin{example}[example name]
+        例子内容, 可以嵌套公式和证明环境.
+    \end{example}
+\end{verbatim}
+        \item 引理环境
+\begin{verbatim}
+    \begin{lemma}[lemma name]
+        引理内容, 可以嵌套公式和证明环境.
+    \end{lemma}
+\end{verbatim}
+        \item 命题环境
+\begin{verbatim}
+    \begin{proposition}[proposition name]
+        命题内容, 可以嵌套公式和证明环境.
+    \end{proposition}
+\end{verbatim}
+        \item 定义环境
+\begin{verbatim}
+    \begin{definition}[definition name]
+        定义内容, 可以嵌套公式和证明环境.
+    \end{definition}
+\end{verbatim}
+        \item 证明环境
+\begin{verbatim}
+    \begin{proof}证明内容......\end{proof}
+\end{verbatim}
+    \end{enumerate}
+\end{tcolorbox}

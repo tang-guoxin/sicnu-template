@@ -1,0 +1,82 @@
+% !TEX program = xelatex
+% !TEX encoding = UTF-8
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% 
+%% File Name:           main.tex Tex文件 文档编译入口文件
+%% Author:              itanggx@gmail.com / tgx126sicnu@126.com
+%% Created On:          2022-09-14 16:36
+%% Last Modified By:    tang-guoxin
+%% Description:         一个基于 TexLive 的 SICNU 模板, 使用该模板的要求为 TeXLive 版本大于等于 2021-11-15, 编译方式必须为 xelatex
+%%                      第一行为Magic注释, 该注释将会使得计算机自动选用xelatex
+%% Project Adress:      www.github.com/sicnu-template
+%% Other:               .vscode 文件夹下的 setting.json 文件为 vscode 配置文件, 在里面已经定义了编译方式和步骤, 不能删除
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{sicnu}
+
+\begin{document}
+    %% ! 论文基本信息
+    % todo 中文标题
+    % // \ChineseTitle{一二三四五六七八九一二三四五六七八九一二三四五六七八九ABCDEFG}
+    \ChineseTitle{一二三四五六七八九一二三四五六七八九九}
+    % todo 英文标题
+    \EnglishTitle{Time New Roman Time New Roman Time New Roman Time New Roman}
+    % todo 中文作者姓名
+    \ChineseAuthorName{魔法学徒}
+    % todo 英文作者姓名
+    \EnglishAuthorName{Magic Apprentice}
+    % todo 学号
+    \StudentNumber{20200801000}
+    % todo 中文导师姓名
+    \ChineseSupervisor{西弗勒斯·斯内普}
+    % todo 英文导师姓名
+    \EnglishSupervisor{Severus Snape}
+    % todo 中文专业
+    \ChineseMajorName{黑魔法}
+    % todo 英文专业
+    \EnglishMajorName{Dark Magic}
+    % todo 研究方向
+    \ResearchDirection{黑魔法防御术和魔药学}
+    % todo 学院
+    \CollegeName{斯莱特林}
+    % todo 提交日期
+    \ThesisSubmissionDate{\today}
+    % todo 答辩日期
+    \ThesisDefenseDate{2022年9月23日}
+
+    %% ! 生成封面, 独创性声明和授权书
+    \MakeTitlePage
+    %% ! 摘要
+    \input{./src/abstract.tex}
+    %% ! 生成目录
+    \GenerateContents
+    \cleardoublepage
+
+    %% ! 第一章
+    \input{./src/part1.tex}
+    \cleardoublepage
+    %% ! 第二章
+    \input{./src/part2.tex}
+    \cleardoublepage
+    %% ! 第三章
+    \input{./src/part3.tex}
+    \cleardoublepage
+    %% ! 第四章
+    % ? ······
+    
+    %% ! 参考文献
+    \SetReference
+    %% ! 致谢
+    \input{./src/acknowledgement.tex}
+    \clearpage
+    %% ! 在校期间研究成果
+    \input{./src/result.tex}
+    %% ! 附录
+    \input{./src/appendix.tex}
+    %% ! 生成算法, 图片以及表格清单
+    \GenerateFTAList
+\end{document}
