@@ -1,5 +1,13 @@
 # SICNU研究生毕业论文模板
 
+
+
+```she	
+https://github.com/tang-guoxin/sicnu-template.git
+```
+
+
+
 ## 1. 这个模板有什么特点
 
 ### 1.1 简洁
