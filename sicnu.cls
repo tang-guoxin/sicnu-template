@@ -7,7 +7,7 @@
 %% Created On:          2022-09-14 16:36
 %% Last Modified By:    tang-guoxin
 %% Description:         一个基于 TexLive 的 SICNU 模板, 使用该模板的要求为 TeXLive 版本大于等于 2021-11-15, 编译方式必须为 xelatex
-%% Project Adress:      www.github.com/sicnu-template
+%% Project Adress:      www.github.com/tang-guoxin/sicnu-template
 %% Other:               .vscode 文件夹下的 setting.json 文件为 vscode 配置文件, 在里面已经定义了编译方式和步骤, 不能删除
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

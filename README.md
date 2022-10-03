@@ -3,7 +3,7 @@
 
 
 ```she	
-https://github.com/tang-guoxin/sicnu-template.git
+git clone https://github.com/tang-guoxin/sicnu-template.git
 ```
 
 
@@ -90,7 +90,7 @@ https://github.com/tang-guoxin/sicnu-template.git
 
 - 这个项目将一直维护到作者不再需要发论文谋生为止
 - 维护期间每年更新一次，你可以`fork`这个项目创建新的分支或者随时提交`issue`到该项目，一起来解决大家在使用过程中的新需求和`bug`
-- 邮箱：itanggx@gmain.com
+- 邮箱：itanggx@gmail.com
 
 
 
