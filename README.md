@@ -96,5 +96,10 @@ git clone https://github.com/tang-guoxin/sicnu-template.git
 
 ## 5. 版本信息
 
-- $2022-09-30$：`version-1`，`By：tang-guoxin`
+- $2022-09-30$：`version-1.0.0`，`By：tang-guoxin`
+  - 创建模板
+
+- $2022-11-28$：`version-1.0.1`
+  - 使用`\toprule`和`\botrule`，`\midrule`以及`\cmidrule(lr)`来产生更美观的表格线以及断点
+
 
