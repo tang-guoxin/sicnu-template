@@ -7,7 +7,7 @@
 %% Created On:          2022-09-14 16:36
 %% Last Modified By:    tang-guoxin
 %% Description:         一个基于 TexLive 的 SICNU 模板, 使用该模板的要求为 TeXLive 版本大于等于 2021-11-15, 编译方式必须为 xelatex
-%% Project Adress:      www.github.com/tang-guoxin/sicnu-template
+%% Project Adress:      www.github.com/sicnu-template
 %% Other:               .vscode 文件夹下的 setting.json 文件为 vscode 配置文件, 在里面已经定义了编译方式和步骤, 不能删除
 %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -26,6 +26,7 @@
 \RequirePackage{xeCJKfntef}     % \CJKunderline, 使得\uline 或 \CJKunderline 下划线能够自动换行
 \RequirePackage[sort&compress]{gbt7714}        % 参考文献规则 (GB/T 7714--2005) 查看源码发现, 该包已经内部导入了natbib
 \RequirePackage[ruled,vlined,linesnumbered,resetcount,algosection]{algorithm2e} % 必须放到标题相关宏包前面
+\RequirePackage{booktabs}       % 使用更好看的表格线
 \RequirePackage{titletoc}       % 控制目录的宏包
 \RequirePackage{titlesec}       % 控制标题的宏包
 \RequirePackage{fancyhdr}       % 页眉和页脚的相关定义
