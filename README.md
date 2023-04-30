@@ -103,7 +103,7 @@ git clone https://github.com/tang-guoxin/sicnu-template.git
   - 使用`\toprule`和`\bottomrule`，`\midrule`以及`\cmidrule(lr)`来产生更美观的表格线以及断点
 
 - **2022.04.30日**：`version-1.1.1`
-  - 修改了若干`.cls`设置，这些改动内容为一下item
+  - 修改了若干`.cls`设置，这些改动内容为以下item
     - 现在英文标题可以根据长度自动变为两行或三行
     - 缩放了学校logo使其更美观
     - 将目录页添加至目录页
