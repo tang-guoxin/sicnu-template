@@ -1,0 +1,29 @@
+\begin{thebibliography}{3}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax\else
+  \urlstyle{same}\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \DeclareUrlCommand\doi{\urlstyle{rm}}
+  \def\eprint#1#2{#2}
+\else
+  \def\doi#1{\href{https://doi.org/#1}{\nolinkurl{#1}}}
+  \let\eprint\href
+\fi
+
+\bibitem[Knuth(1984)]{texbook}
+KNUTH D~E.
+\newblock Computers \& typesetting: The texbook\allowbreak[Z].
+\newblock 1984.
+
+\bibitem[Bergstra et~al.(2011)Bergstra, Bardenet, Bengio, and K{\'e}gl]{tpe}
+BERGSTRA J, BARDENET R, BENGIO Y, et~al.
+\newblock Algorithms for hyper-parameter optimization\allowbreak[J].
+\newblock Advances in neural information processing systems, 2011, 24.
+
+\bibitem[LeCun et~al.(2015)LeCun, Bengio, and Hinton]{lecun}
+LECUN Y, BENGIO Y, HINTON G.
+\newblock Deep learning\allowbreak[J].
+\newblock nature, 2015, 521\allowbreak (7553): 436-444.
+
+\end{thebibliography}

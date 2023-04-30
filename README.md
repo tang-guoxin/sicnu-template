@@ -96,10 +96,18 @@ git clone https://github.com/tang-guoxin/sicnu-template.git
 
 ## 5. 版本信息
 
-- $2022-09-30$：`version-1.0.0`，`By：tang-guoxin`
+- $2022-09-30$：`version-1.0.0`
   - 创建模板
 
 - $2022-11-28$：`version-1.0.1`
-  - 使用`\toprule`和`\botrule`，`\midrule`以及`\cmidrule(lr)`来产生更美观的表格线以及断点
+  - 使用`\toprule`和`\bottomrule`，`\midrule`以及`\cmidrule(lr)`来产生更美观的表格线以及断点
 
-
+- **2022.04.30日**：`version-1.1.1`
+  - 修改了若干`.cls`设置，这些改动内容为一下item
+    - 现在英文标题可以根据长度自动变为两行或三行
+    - 缩放了学校logo使其更美观
+    - 将目录页添加至目录页
+    - 算法，图片以及表格清单从文章末尾调整为放置在目录页后
+    - 纠正了非正文页的页码格式bug
+    - 允许使用转置表格`sidewaystable`环境
+  - 稍微调整了`main.tex`的布局

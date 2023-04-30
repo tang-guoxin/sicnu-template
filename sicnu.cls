@@ -63,7 +63,11 @@
 \RequirePackage{hyperref}       % 超链接
 \RequirePackage{bibentry}       % 引入参考文献全文
 \RequirePackage{listings}       % 插入代码
+\RequirePackage{cases}          % 子公式环境
 \RequirePackage[most]{tcolorbox}% 颜色盒子
+\RequirePackage[figurewithin=section]{caption}
+\RequirePackage{mathrsfs}       % 使用花体符号
+\RequirePackage{rotating}       % 表格旋转宏包: sidewaystable
 
 % \RequirePackage{algorithm}      % 算法
 % \RequirePackage{algorithmic}
@@ -72,6 +76,9 @@
 
 \usetikzlibrary{fpu}            % 修理不能使用ifthenelse的错误
 \usetikzlibrary{math}           % 使用数学程序
+
+
+\DeclareMathOperator{\sech}{sech} % 设置\sech
 
 %% ! 设置超链接
 \hypersetup{
@@ -100,19 +107,34 @@
 \fi
 }
 
-%% ! Times New Roman
+%% ! 将参考文献与正文保持水平的函数
+\newcommand*{\plcite}[1]{%
+  \begingroup
+    \romannumeral-`\x % remove space at the beginning of \setcitestyle
+    \setcitestyle{numbers}%
+    \cite{#1}%
+  \endgroup   
+}
+
+%% ! 设置英文字体为: Times New Roman
 \setmainfont{Times New Roman}
+%% ! 设置中文字体为: 仿宋 ???? 
+% \setCJKmainfont{FangSong}
 
 %% ! 页边距
 % \geometry{hmargin=1.25in,vmargin=1in}
+%  hmargin = 25mm,
+%  vmargin = 30mm,
 \geometry{%
-    hmargin = 25mm,
-    vmargin = 30mm,
+    left    = 25mm,
+    right   = 25mm,
+    top     = 30mm,
+    bottom  = 25mm,
+    headheight = 23cm,
+    headsep = 2mm,
+    footskip= 7mm,
     twoside = true
 }
-
-%% ! 行间距为 20 磅
-\setlength{\baselineskip}{20pt}
 
 %% ! 获取字段长度
 \def\Length#1{{\count0=0 \getlength#1\end \number\count0}}
@@ -122,6 +144,8 @@
 
 %% ! 定义基本元素
 \newlength{\thetitlelength}
+\newlength{\thetitlelengthe}
+
 % \newcommand{\thetitlelength}{999}
 % \renewcommand{\thetitlelength}{\Length{#1}}
 \newcommand{\ctitle}{(中文题目)}
@@ -131,7 +155,10 @@
 }
 
 \newcommand{\etitle}{(English Title)}
-\newcommand{\EnglishTitle}[1]{\renewcommand{\etitle}{#1}}
+\newcommand{\EnglishTitle}[1]{
+    \renewcommand{\etitle}{#1}
+    \settowidth{\thetitlelengthe}{#1}
+}
 
 \newcommand{\cname}{(中文名)}
 \newcommand{\ChineseAuthorName}[1]{\renewcommand{\cname}{#1}}
@@ -237,7 +264,7 @@
 %% ? 页眉设置
 \renewcommand{\sectionmark}[1]{\markboth{\thesection~\ #1}{}}
 \fancyhead[CE]{{\zihao{-5}\songti \DegreeLevel}}
-\fancyhead[CO]{{\zihao{-5}\songti\leftmark}}
+\fancyhead[CO]{{\zihao{-5}\songti \leftmark}}
 %% ? 页脚设置
 \fancyfoot[LE,RO]{\thepage}
 % \renewcommand{\headrulewidth}{2pt}
@@ -246,7 +273,10 @@
 %% ! 定制目录
 \titlecontents{section}[0pt]{\addvspace{5pt}\filright}{\contentspush{\thecontentslabel}}{}{\titlerule*[8pt]{.}\contentspage}
 \newcommand{\GenerateContents}{%
-\renewcommand\contentsname{\hfill \textbf{目\quad 次} \hfill}
+\renewcommand\contentsname{\hfill \textbf{目\quad 录} \hfill}
+% \pagenumbering{Roman}
+\markboth{目录}{}
+\addcontentsline{toc}{section}{目录}
 \tableofcontents
 \cleardoublepage
 \pagenumbering{arabic}
@@ -259,23 +289,37 @@
 \renewcommand\refname{\hfill \textbf{参考文献} \hfill}
 %% todo cmd
 \newcommand{\SetReference}{%
+\zihao{5}\selectfont{
 \addcontentsline{toc}{section}{参考文献}
 \bibliography{./src/ref.bib}
+}
 \cleardoublepage
+\zihao{-4}
 }
 
 %% ! 生成扉页
 \newcommand{\tknumx}{18}
+\newcommand{\etknumx}{36}
 \newcommand{\maxtitlelength}{18}
 %% todo: next
 \newcommand{\MakeTitlePage}[1][0]{
-%% ? def
+%% ! 行间距为 20 磅
+\setlength{\baselineskip}{20pt}
+%% ? def 判断[中文]标题是否过长
 \newcommand{\thisparone}{#1}
 \ifthenelse{\lengthtest{\thetitlelength > 18em}}{
     \renewcommand{\tknumx}{19}
 }{
     \renewcommand{\tknumx}{18}
 }
+%% ? def 判断[英文]标题是否过长
+\ifthenelse{\lengthtest{\thetitlelengthe > 36em}}{
+    \renewcommand{\etknumx}{37}
+}{
+    \renewcommand{\etknumx}{36}
+}
+
+
 %% todo
 \thispagestyle{empty}
 \addtocounter{page}{-1}
@@ -322,7 +366,7 @@
 %% ! 加载logo
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.1]{./format/logo.pdf}
+    \includegraphics[scale=0.2]{./format/logo.pdf}
 \end{figure}
 % \vspace*{-1em}
 %% ! 中英文题目
@@ -334,7 +378,7 @@
             % \fbox{
                 \begin{minipage}[t]{10em}
                     \begin{figure}[H]
-                        \makebox[7em][s]{\fontsize{16pt}{\baselineskip}{中文论文题目：}}
+                        \makebox[7em][s]{\fontsize{16pt}{\baselineskip}{\textbf{中文论文题目：}}}
                     \end{figure}
                 \end{minipage}
             % }
@@ -378,7 +422,7 @@
             % \fbox{
                 \begin{minipage}[t]{10em}
                     \begin{figure}[H]
-                        \makebox[7em][s]{\fontsize{16pt}{\baselineskip}{英文论文题目：}}
+                        \makebox[7em][s]{\fontsize{16pt}{\baselineskip}{\textbf{英文论文题目：}}}
                     \end{figure}
                 \end{minipage}
             % }
@@ -389,9 +433,28 @@
                     \vspace{-0.3em}
                     \begin{figure}[H]
                         \begin{tikzpicture}
-                            \draw (0, 0.9) -- (12, 0.9);
-                            \draw (0, 0) -- (12, 0);
-                            \node at(6, 0.8) {\parbox[t][][c]{28em}{\centering\fontsize{16pt}{26pt}\selectfont\textbf{\etitle}}};
+                            \tikzmath{
+                                function drawtitle(\stringnum){%
+                                    if \stringnum > 2*\maxtitlelength then{
+                                        {
+                                            \draw (0, 1.8) -- (12, 1.8);
+                                            \draw (0, 0.9) -- (12, 0.9);
+                                            \draw (0, 0) -- (12, 0);
+                                            \node at(6, 1.3) {\parbox[t][][c]{28em}{\centering\fontsize{16pt}{26pt}\selectfont\bfseries\etitle}};
+                                        };
+                                    }else{%
+                                        {
+                                            \draw (0, 0.9) -- (12, 0.9);
+                                            \draw (0, 0) -- (12, 0);
+                                            \node at(6, 0.8) {\parbox[t][][c]{28em}{\centering\fontsize{16pt}{26pt}\selectfont\bfseries\etitle}};
+                                        };
+                                    };
+                                };
+                            drawtitle(\etknumx);
+                            };
+                            % \draw (0, 0.9) -- (12, 0.9);
+                            % \draw (0, 0) -- (12, 0);
+                            % \node at(6, 0.8) {\parbox[t][][c]{28em}{\centering\fontsize{16pt}{26pt}\selectfont\textbf{\etitle}}};
                         \end{tikzpicture}
                     \end{figure}
                 \end{minipage}
@@ -508,10 +571,10 @@
         \end{figure}
     \end{figure}
 \begin{quotation}
-\setlength{\parindent}{2em}\selectfont
-\par {\heiti 摘要：} \noindent
+\setlength{\parindent}{2em}\zihao{-4}\selectfont
+\par {\heiti 摘要:~} \noindent
 }{%
-\par {\heiti 关键词：} \ckey
+\par {\heiti 关键词:~} \ckey
 \end{quotation}
 \cleardoublepage
 }
@@ -541,7 +604,7 @@
         \end{figure}
     \end{figure}
 \begin{quotation}
-\setlength{\parindent}{2em}\selectfont
+\setlength{\parindent}{2em}\zihao{-4}\selectfont
 \par {\textbf{Abstract:}} \noindent
 }{%
 \par {\textbf{Keywords:}} \ekey
@@ -604,9 +667,11 @@
 % \newcommand{\listofalgorithmes}{\tocfile{\listalgorithmcfname}{loa}}
 
 %% ! 关联章节和公式
-\numberwithin{equation}{section}
 \numberwithin{figure}{section}
+\numberwithin{equation}{section}
 \numberwithin{table}{section}
+\newcounter{algorithm}
+\numberwithin{algorithm}{section}
 
 %% ! 设置表格图片与标题的距离
 
@@ -616,9 +681,15 @@
 
 
 \newcommand{\GenerateFTAList}{
-    \thispagestyle{empty} 
-    \markboth{图表和算法清单}{}
+    \section*{\hfill 图表和算法清单 \hfill}
+    \addcontentsline{toc}{section}{图表和算法清单}
+    \pagenumbering{Roman}
+    \setcounter{page}{7}
     \listoffigures
     \listoftables
+    \markboth{图表和算法清单}{}
     \listofalgorithms
+    \cleardoublepage
+    \pagenumbering{arabic}
+    \setcounter{page}{1}
 }
